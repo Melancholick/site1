@@ -3,15 +3,31 @@ title: Remote Jobs for QA's
 permalink: qas
 layout: page
 ---
-
-
+<noscript>
+    <style>
+        .collapse {display:block;}
+    </style>
+</noscript>
 {% for jobad in site.data.expqaremote %}
-<h3>{{ jobad.title }}</h3>
 
-{{ jobad.sourceName }} - {{ jobad.published }}<br>
-Tags:{% for tag in  jobad.tags %}  {{ tag }};{% endfor %}<br>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading{{j}}">
+      <h3 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{j}}" aria-expanded="true" aria-controls="collapse{{j}}">
+          {{ jobad.title }}
+        </a>
+      </h3>
+    </div>
+    <div id="collapse{{j}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{j}}">
+      <div class="panel-body">
+        {{ jobad.sourceName }} - {{ jobad.published }}<br>
+        Tags:{% for tag in  jobad.tags %}  {{ tag }};{% endfor %}<br>
+        {{ jobad.content }}
+      </div>
+    </div>
+  </div>
+</div>
 
-{{ jobad.content }}
-
+{% assign j = j | plus: 1 %}
 {% endfor %}
-
